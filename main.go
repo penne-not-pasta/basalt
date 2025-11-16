@@ -10,7 +10,9 @@ import (
 )
 
 func main() {
-	cmd.Execute()
 	utils.LogSetup("logs/main.log")
-	log.Print("cute test :3")
+	log.Print("Logger was Setup")
+	cmd.Execute()
+	log.Print("Executed root command")
+
 }
