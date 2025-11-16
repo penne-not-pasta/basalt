@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"os/exec"
+
 	"github.com/spf13/cobra"
 )
 
@@ -8,6 +10,10 @@ var GoogleCmd = &cobra.Command{
 	Use:   "google",
 	Short: "Login with google",
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Println("Logging in with google...")
+		url := "https://google.com"
+		err := exec.Command("xdg-open", url).Start()
+		if err != nil {
+			cmd.Println("Error opening browser:", err)
+		}
 	},
 }
