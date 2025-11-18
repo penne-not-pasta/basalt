@@ -18,6 +18,9 @@ var NextcloudCmd = &cobra.Command{
 	Use:   "nextcloud",
 	Short: "Login with Nextcloud",
 	Run: func(cmd *cobra.Command, args []string) {
+		/*
+		* THIS WAY OF STORING CREDENTIALS IS NOT SECURE, AND WILL BE REPLACED ONCE WE FIND A BETTER WAY TO HANDLE THEM
+		 */
 		var url string
 		var username string
 		var password string
