@@ -2,13 +2,12 @@ package authGoogle
 
 import (
 	crand "crypto/rand"
-	"crypto/sha256"
 	"encoding/base64"
 	"log"
 	"oreonproject/basalt/utils"
 )
 
-func CodeVerifierKeyGen() []byte {
+func CodeVerifierKeyGen() string {
 	// We will Initialise the logs
 	utils.LogInit("logs/oauth.log")
 	codeVerifierKey := make([]byte, 32) // creates a new byte slice
@@ -17,19 +16,8 @@ func CodeVerifierKeyGen() []byte {
 	crand.Read(codeVerifierKey)
 	log.Println("Code Verification Key Generated")
 
-	return codeVerifierKey
-}
-
-func CodeChallengeGen(codeVerifier []byte) string {
-	utils.LogInit("logs/oauth.log")
-	var codeChallenge string
-
-	hasher := sha256.New()
-	hasher.Write(codeVerifier) // Hashes the codeVerifier
-
-	codeChallenge = base64.RawURLEncoding.EncodeToString(codeVerifier) // Encodes the base64 URL to a string
-	log.Print("codeChallenge Generated")
-	return codeChallenge
+	Verifier := string(codeVerifierKey)
+	return Verifier
 }
 
 func StateTokGen() string {

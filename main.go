@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"oreonproject/basalt/cmd"
+	"oreonproject/basalt/oauth/authGoogle"
 	"oreonproject/basalt/utils"
 )
 
@@ -11,4 +12,5 @@ func main() {
 	log.Print("Logger was Setup")
 	cmd.Execute()
 	log.Print("Executed root command")
+	authGoogle.CraftAuthURI()
 }
