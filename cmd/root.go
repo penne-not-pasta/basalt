@@ -13,7 +13,7 @@ var rootCmd = &cobra.Command{
 	Use:   "basalt",
 	Short: "Root command",
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Println("Hello world!")
+		cmd.HelpFunc()
 		log.Print("Root Command Executed")
 	},
 }
@@ -29,7 +29,6 @@ func Execute() {
 func init() {
 	utils.LogInit("logs/root.log")
 	rootCmd.AddCommand(auth.AuthCmd)
-
-	auth.AuthCmd.AddCommand(auth.GoogleCmd)
-	auth.AuthCmd.AddCommand(auth.NextcloudCmd)
+	rootCmd.AddCommand(auth.GoogleCmd)
+	rootCmd.AddCommand(auth.NextcloudCmd)
 }

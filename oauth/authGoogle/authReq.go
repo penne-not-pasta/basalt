@@ -3,10 +3,12 @@ package authGoogle
 import (
 	"fmt"
 	"net/url"
+	"oreonproject/basalt/utils"
 	"strings"
 )
 
 func CraftAuthURI() string {
+	log := utils.LogInit("logs/authReq.log")
 	authServer := "https://accounts.google.com/o/oauth2/v2/auth" // Defines the base Auth server to send the request to
 	// Creates a Values struct to hold the Key and Value pairs for OAuth2
 	params := url.Values{}
@@ -29,7 +31,7 @@ func CraftAuthURI() string {
 
 	authURL := fmt.Sprintf("%s?%s", authServer, params.Encode()) // Formats the Parameters with the AuthURL
 	authURL = strings.ReplaceAll(authURL, "+", "%20")            // Replaces all +'s with %20 as google OAuth2 servers crash out without them???
-	fmt.Println(authURL)
+	log.Print("Published Auth URL")
 	return authURL
 
 }

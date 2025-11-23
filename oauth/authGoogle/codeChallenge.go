@@ -4,15 +4,13 @@ import (
 	crand "crypto/rand"
 	"crypto/sha256"
 	"encoding/base64"
-	"fmt"
-	"log"
 	"oreonproject/basalt/utils"
 	"strings"
 )
 
 func CodeVerifierKeyGen() []byte {
 	// We will Initialise the logs
-	utils.LogInit("logs/oauth.log")
+	log := utils.LogInit("logs/oauth.log")
 	codeVerifierKey := make([]byte, 32) // creates a new byte slice
 
 	// Use the Read Function from crypto/rand to populate the codeVerifier with cryptographically secure random values
@@ -39,6 +37,5 @@ func StateTokGen() string {
 
 	state := base64.RawURLEncoding.EncodeToString(stateTok) // Encodes state to base64 for added protections
 	state = strings.ReplaceAll(state, "%", "")
-	fmt.Println(state)
 	return state
 }

@@ -21,7 +21,7 @@ func LogInit(path string) *log.Logger {
 	}
 
 	// We now set the log to output to the created logfile and our error output
-	logger := log.New(io.MultiWriter(logFile, os.Stderr), "log: ", log.Lmsgprefix|log.Lshortfile|log.Ltime|log.Ldate)
+	logger := log.New(io.MultiWriter(logFile), "log: ", log.Lmsgprefix|log.Lshortfile|log.Ltime|log.Ldate)
 	log.SetOutput(io.MultiWriter(logFile, os.Stderr))
 	log.SetFlags(log.Lmsgprefix | log.Lshortfile | log.Ltime)
 	return logger
