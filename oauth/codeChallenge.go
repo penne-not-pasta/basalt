@@ -1,4 +1,4 @@
-package authGoogle
+package oauth
 
 import (
 	crand "crypto/rand"
