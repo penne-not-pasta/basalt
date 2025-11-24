@@ -3,6 +3,7 @@ package authGoogle
 import (
 	"fmt"
 	"net/url"
+	"oreonproject/basalt/oauth"
 	"oreonproject/basalt/utils"
 	"strings"
 )
@@ -25,9 +26,9 @@ func CraftAuthURI() string {
 	params.Add("include_granted_scopes", "true")
 	params.Add("response_type", "code")                                                                                                             // Response type is an AuthCode
 	params.Add("scope", strings.Join([]string{"openid", "https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/drive"}, " ")) // our scopes
-	params.Add("code_challenge", CodeChallengeGen())                                                                                                // Generates a Code Challenge
+	params.Add("code_challenge", oauth.CodeChallengeGen())                                                                                          // Generates a Code Challenge
 	params.Add("code_challenge_method", "S256")                                                                                                     // Code Challenge method is a base64 RAWURLENCODED SHA256 hash of the CodeVerifier
-	params.Add("state", StateTokGen())                                                                                                              // Generates a State Token to Prevent Cross Site Request Forgery
+	params.Add("state", oauth.StateTokGen())                                                                                                        // Generates a State Token to Prevent Cross Site Request Forgery
 
 	authURL := fmt.Sprintf("%s?%s", authServer, params.Encode()) // Formats the Parameters with the AuthURL
 	authURL = strings.ReplaceAll(authURL, "+", "%20")            // Replaces all +'s with %20 as google OAuth2 servers crash out without them???
